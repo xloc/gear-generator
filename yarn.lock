@@ -1487,6 +1487,11 @@
     ejs "^2.6.1"
     magic-string "^0.25.0"
 
+"@svgdotjs/svg.js@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@svgdotjs/svg.js/-/svg.js-3.1.1.tgz#3cf6a59e6d8708cd76d38b26e7d682dacb2f3670"
+  integrity sha512-73FggAUBS+zuHhJOMZiAsuE5qpwA4pmWUbLuvof2g3YnWEc3QhXA3tjqZlJJukBobSA23a/avf1Vb1U1QbER1Q==
+
 "@svgr/babel-plugin-add-jsx-attribute@^5.4.0":
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-5.4.0.tgz#81ef61947bb268eb9d50523446f9c638fb355906"
@@ -1751,6 +1756,11 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+
+"@types/lodash@^4.14.171":
+  version "4.14.171"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.171.tgz#f01b3a5fe3499e34b622c362a46a609fdb23573b"
+  integrity sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -6946,7 +6956,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
+"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -10545,6 +10555,11 @@ tr46@^2.0.2:
   integrity sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
   dependencies:
     punycode "^2.1.1"
+
+transformation-matrix@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/transformation-matrix/-/transformation-matrix-2.8.0.tgz#34186b5d4b761b5cd35f8d32b7085838ed69b621"
+  integrity sha512-ciqdbEofLC3RFCj1bo06fH/IXf/83DOyuXi50RKdUx2iWFI02+mvsiSqB7pKKypBJgAxzCf7IvA+FMD70HXWQQ==
 
 tryer@^1.0.1:
   version "1.0.1"

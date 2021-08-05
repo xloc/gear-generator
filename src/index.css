@@ -9,3 +9,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --halt-color: #2253;
+}
+
+.halt {
+  background:
+    linear-gradient(135deg, 
+    var(--halt-color) 12.5%,
+    transparent 12.5% 37.5%, 
+    var(--halt-color) 37.5% 62.5%, 
+    transparent 62.5% 87.5%,
+    var(--halt-color) 87.5%
+    );
+  background-size: 50px 50px;
+  background-color: transparent;
+  height:100%;
+  width: 100%;
+}

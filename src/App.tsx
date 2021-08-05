@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "./index.css"
 import { Svg } from '@svgdotjs/svg.js';
 import _ from 'lodash';
 import { InvoluteGear2D } from './geometry/involute_gear';
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
   },
 }));
 
@@ -97,7 +98,7 @@ function App() {
 
     const polygon = draw.polygon()
       .fill('transparent')
-      .stroke({ color: 'tomato', width: 0.05 });
+      .stroke({ color: 'tomato', width: module * 0.05 });
     polygon.plot(g.points);
 
     set_svg(draw);
@@ -107,8 +108,15 @@ function App() {
   return (
     <div className="App">
       <div className={classes.root}>
-        <main className={classes.content}>
-          <div dangerouslySetInnerHTML={{ __html: svg.svg() }}></div>
+        <main className={classes.content} style={{ position: 'relative', display: 'flex' }}>
+          {
+            validated ? null :
+              <div
+                className="halt"
+                style={{ position: 'absolute', top: 0, left: 0 }}
+              ></div>
+          }
+          <div style={{ flex: "1" }} dangerouslySetInnerHTML={{ __html: svg.svg() }}></div>
         </main>
         <Drawer
           className={classes.drawer}

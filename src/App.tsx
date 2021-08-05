@@ -44,6 +44,7 @@ function useValidation<T>(
 ): [string, any, T, boolean] {
   const [text, setText] = useState(`${defaultValue}`);
   const [value, setValue] = useState(defaultValue);
+  const [valid_value, set_valid_value] = useState(defaultValue);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -51,22 +52,19 @@ function useValidation<T>(
   }, [text, parser])
 
   useEffect(() => {
-    setError(!validator(value));
-  }, [value, validator])
+    const is_valid = validator(value);
+    setError(!is_valid);
+    if (is_valid) {
+      set_valid_value(value);
+    }
+  }, [value, validator]);
 
-  return [text, setText, value, error];
+  return [text, setText, valid_value, error];
 }
 
 
 function App() {
   const classes = useStyles();
-
-  const [gear_params, set_gear_params] = useState({
-    n_teeth: 18,
-    module: 1,
-    pressure_angle_deg: 20,
-    stretch_ratio: 1.2,
-  });
 
   const [validated, setValidated] = useState(true);
   const [n_teeth_text, set_n_teeth_text, n_teeth, n_teeth_error] =
@@ -74,7 +72,7 @@ function App() {
   const [module_text, set_module_text, module, module_error] =
     useValidation(1, parseFloat, (v) => (v >= 0));
   const [pressure_angle_deg_text, set_pressure_angle_deg_text, pressure_angle_deg, pressure_angle_deg_error] =
-    useValidation(20, parseFloat, (v) => (v >= 17 && v < 22));
+    useValidation(20, parseFloat, (v) => (v >= 17 && v <= 22));
   const [stretch_ratio_text, set_stretch_ratio_text, stretch_ratio, stretch_ratio_error] =
     useValidation(1, parseFloat, (v) => (v >= 1));
   useEffect(() => {
@@ -84,14 +82,6 @@ function App() {
 
   const [svg, set_svg] = useState(new Svg().size('100%', '100%'));
   useEffect(() => {
-    if (n_teeth_error || module_error || pressure_angle_deg_error || stretch_ratio_error) return;
-    console.log({
-      n_teeth,
-      module,
-      pressure_angle_deg,
-      stretch_ratio
-    });
-
     let g = new InvoluteGear2D(
       n_teeth,
       module,
@@ -100,9 +90,9 @@ function App() {
     );
 
     // view port size
-    const vs = g.tip_diameter / 0.8;
+    const size = g.tip_diameter / 0.8;
     const draw = new Svg()
-      .viewbox(-vs / 2, -vs / 2, vs, vs)
+      .viewbox(-size / 2, -size / 2, size, size)
       .size('100%', '100%');
 
     const polygon = draw.polygon()
@@ -111,10 +101,8 @@ function App() {
     polygon.plot(g.points);
 
     set_svg(draw);
-  }, [
-    n_teeth, module, pressure_angle_deg, stretch_ratio, validated,
-    n_teeth_error, module_error, pressure_angle_deg_error, stretch_ratio_error
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [n_teeth, module, pressure_angle_deg, stretch_ratio]);
 
   return (
     <div className="App">
@@ -159,10 +147,6 @@ function App() {
                 value={stretch_ratio_text}
                 onChange={(e) => set_stretch_ratio_text(e.target.value)} />
             </ListItem>
-            <ListItem>
-              {JSON.stringify({ validated })}
-            </ListItem>
-
           </List>
         </Drawer>
       </div>

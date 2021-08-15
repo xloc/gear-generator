@@ -10,6 +10,8 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { makeStyles } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 const drawerWidth = 240;
@@ -21,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
     width: `calc(100% - ${drawerWidth}px)`,
     marginRight: drawerWidth,
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
   drawerPaper: {
     width: drawerWidth,
   },
@@ -34,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     // padding: theme.spacing(3),
+  },
+  configDrawer: {
+    width: drawerWidth,
+    flexShrink: 0,
   },
 }));
 
@@ -105,21 +107,30 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [n_teeth, module, pressure_angle_deg, stretch_ratio]);
 
+  const [display_3d, set_display_3d] = useState(false);
+  const toggle_display_3d = () => {
+    set_display_3d((v) => !v);
+  }
+
+
   return (
     <div className="App">
       <div className={classes.root}>
-        <main className={classes.content} style={{ position: 'relative', display: 'flex' }}>
+        <main className={classes.content} style={{ display: 'flex' }}>
           {
             validated ? null :
               <div
                 className="halt"
-                style={{ position: 'absolute', top: 0, left: 0 }}
               ></div>
           }
-          <div style={{ flex: "1" }} dangerouslySetInnerHTML={{ __html: svg.svg() }}></div>
+          {
+            display_3d ?
+              null :
+              <div style={{ flex: "1" }} dangerouslySetInnerHTML={{ __html: svg.svg() }}></div>
+          }
         </main>
         <Drawer
-          className={classes.drawer}
+          className={classes.configDrawer}
           variant="permanent"
           classes={{
             paper: classes.drawerPaper,
@@ -127,6 +138,13 @@ function App() {
           anchor="right"
         >
           <List>
+            <ListItem>
+              <FormControlLabel
+                control={<Switch size="small" checked={display_3d} onChange={toggle_display_3d} />}
+                label="Show 3D"
+                labelPlacement="start"
+              />
+            </ListItem>
             <ListItem>
               <TextField
                 error={n_teeth_error}
